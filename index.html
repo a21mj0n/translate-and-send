@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>Translate and Send To Telegram Channel</title>
   <link rel="stylesheet" href="src/css/main.css">
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
@@ -10,6 +10,8 @@
 
 <label for="text">Message</label>
 <input id="text" type="text">
+
+<br><br>
 
 <label for="language">Select Language</label>
 <select name="lang" id="language">
@@ -21,7 +23,14 @@
 
 <button id="translate">Translate</button>
 
+<br><br>
+
 <button id="sendMessage">Send</button>
+
+<br><br>
+
+Result:
+<p id="result"></p>
 
 <script type="module" src="src/js/main.js"></script>
 </body>
