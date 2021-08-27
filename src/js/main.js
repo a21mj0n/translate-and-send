@@ -13,7 +13,6 @@ language.addEventListener('change', (e) => {
 
 
 let text = 'Default text';
-
 translateButton.addEventListener('click', async () => {
   const qs = obj => {
     return new URLSearchParams(obj).toString();
@@ -24,31 +23,28 @@ translateButton.addEventListener('click', async () => {
     target: langValue,
   });
 
-  const options = {
+  const response = await fetch('https://google-translate1.p.rapidapi.com/language/translate/v2', {
     method: 'POST',
-    url: 'https://google-translate1.p.rapidapi.com/language/translate/v2',
     headers: {
       'content-type': 'application/x-www-form-urlencoded',
       'accept-encoding': 'application/gzip',
-      'x-rapidapi-host': 'google-translate1.p.rapidapi.com',
+      'x-rapidapi-host': config.rapidApiHost,
       'x-rapidapi-key': config.rapidApiKey,
       useQueryString: true,
     },
-    data: data,
-  };
-
-  const response = await axios.request(options);
-
-  // log for debugging
-  console.log(response.data.data.translations[0].translatedText);
+    body: data,
+  });
+  const res = await response.json();
+  // log response
+  console.log(res);
   // translated text
-  text = response.data.data.translations[0].translatedText;
+  text = res.data.translations[0].translatedText;
   // show result text
   result.innerHTML = text;
 });
 
 sendButton.addEventListener('click', async () => {
-  await fetch(`https://api.telegram.org/bot${config.botApi}/sendMessage?chat_id=${config.chatID}&text= Original: ${input.value} --> Translated: ${text}`);
+  await fetch(`https://api.telegram.org/bot${config.botApi}/sendMessage?chat_id=${config.chatID}&text=Original: ${input.value} --> Translated: ${text}`);
   input.value = '';
 });
 

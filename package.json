@@ -1,8 +1,0 @@
-{
-  "name": "Telegram Message",
-  "version": "1.0.0",
-  "dependencies": {},
-  "devDependencies": {
-    "axios": "^0.21.1"
-  }
-}
